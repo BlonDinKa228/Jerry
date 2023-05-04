@@ -1,7 +1,7 @@
 import logging
-import random
+import os
+from dotenv import load_dotenv
 from main2 import API_TOKEN
-from asyncio import sleep
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
@@ -10,8 +10,8 @@ import time
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
-
-bot = Bot(token=API_TOKEN)
+PROXY_URL = "http://proxy.server:3123"
+bot = Bot(token=os.environ.get("API_TOKEN"), proxy=PROXY_URL)
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=["start"])
