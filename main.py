@@ -1,8 +1,8 @@
-﻿import logging
+import logging
 import random
-from main2 import Sticker, API_TOKEN, Lol, Axir,kb
+from main2 import API_TOKEN
 from asyncio import sleep
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
 import time
@@ -50,6 +50,9 @@ async def score_callback2(callback: types.CallbackQuery):
 
 @dp.message_handler(commands=["game"])
 async def game(message: types.Message):
+    kb = ReplyKeyboardMarkup(resize_keyboard=True)
+    buttons = ["Кубик", "Баскет", "Футбл", "Дартс", "Казик"]
+    kb.add(*buttons)
     await message.answer("В какую игру будем играть?", reply_markup=kb)
     await message.delete()
 
@@ -82,7 +85,7 @@ async def darts(message: types.Message):
     g = v["dice"]["value"]
     time.sleep(3)
     if (g == 6):
-        await bot.send_sticker(message.from_user.id, Axir)
+        await bot.send_sticker(message.from_user.id, "CAACAgIAAxkBAAEIuPZkR7rToHRe3IFcb9-OEBa49WtEKAACPAADD0bMOl1i33t8q27_LwQ")
     elif (g == 2) or (g == 3):
         await message.answer("Слабенько")
     elif (g == 4) or (g == 5):
@@ -112,7 +115,7 @@ async def basket(message: types.Message):
     if(g == 4) or (g == 5):
         await message.answer("Ашалеть")
     elif (g == 3):
-        await bot.send_sticker(message.from_user.id, Lol)
+        await bot.send_sticker(message.from_user.id, "CAACAgIAAxkBAAEItOZkRpKZHD8KLjZzBN4xkUsBQKR1qQACUw8AAtu_eEgmaporXgF4Li8E")
     else:
         await message.answer("Попущ")
     await message.delete()
